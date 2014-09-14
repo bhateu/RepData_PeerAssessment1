@@ -128,7 +128,7 @@ for (counter in (1 : nrow(activity) ) ){
 
 
 ```r
-a2 <- aggregate(activity$steps, by = list(activity.new$date),FUN = sum,na.rm=TRUE)
+a2 <- aggregate(activity.new$steps, by = list(activity.new$date),FUN = sum,na.rm=TRUE)
 
 hist(a2$x,xlab="steps per day",main="Total Steps Per Day Distribution",col='red',breaks=100)
 ```
@@ -136,11 +136,11 @@ hist(a2$x,xlab="steps per day",main="Total Steps Per Day Distribution",col='red'
 ![plot of chunk unnamed-chunk-10](figure/unnamed-chunk-10.png) 
 
 
-The new Mean of the Total steps per day is : 9354.2295.
-The new Median of the Total steps per day is : 10395.
+The new Mean of the Total steps per day is : 1.0766 &times; 10<sup>4</sup>.
+The new Median of the Total steps per day is : 1.0766 &times; 10<sup>4</sup>.
 
 
-Having adopted the given strategy (as in step 2), the mean and median after creation of the new dataset remains unchanged.
+Having adopted the given strategy (as in step 2), the mean and median, after creation of the new dataset with imputed values, shift by 1411.9592 and 371.1887 respectively.
 
 
 ### Differences in activity patterns on weekdays and weekends
@@ -167,11 +167,18 @@ mean.weekday.steps <- aggregate(activity.new$steps,by = list(activity.new$interv
 #head(mean.weekday.steps)
 
 colnames(mean.weekday.steps) <- c("interval","day.type","mean.steps")
+```
 
-#make the plot using lattice plots
-require(lattice)
+
+```
+## Loading required package: lattice
+```
+
+
+```r
 xyplot(mean.weekday.steps$mean.steps ~ mean.weekday.steps$interval | mean.weekday.steps$day.type, data = mean.weekday.steps,layout=c(1,2),type="l",ylab="Mean Number of Steps", xlab="Interval")
 ```
 
-![plot of chunk unnamed-chunk-12](figure/unnamed-chunk-12.png) 
+![plot of chunk unnamed-chunk-14](figure/unnamed-chunk-14.png) 
 
+As seen from the above plots, the activity pattern follows similar trend for weekdays and weekends though is slightly more on weekdays than on weekends.
